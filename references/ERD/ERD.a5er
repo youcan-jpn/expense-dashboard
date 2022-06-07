@@ -1,0 +1,182 @@
+﻿# A5:ER FORMAT:16
+# A5:ER ENCODING:UTF8
+# A5:ER Mk-1 Copyright © 2007 m.matsubara
+# A5:SQL Mk-2 Version 2.17.2 Copyright © 1997 - 2022 m.matsubara
+#  https://a5m2.mmatsubara.com
+
+[Manager]
+ProjectName=expense-dashboard
+Author=Yuta Ono
+MaxEntityRowShow=1000
+ReadOnlyRecommend=0
+Page=Main
+PageInfo="Main",2,"A3Landscape",$FFFFFF
+LogicalView=1
+DecodeDomain=0
+ViewModePageIndividually=1
+ViewMode=2
+ViewFormat=0
+UseNondependenceDashLine=0
+FontName=Tahoma
+FontSize=12
+PaperSize=A4Landscape
+HeaderLeft=
+HeaderCenter=
+HeaderRight=
+FooterLeft=
+FooterCenter=
+FooterRight=
+ShowPageoutRelation=1
+RDBMSType=6
+RDBMSTypeName=PostgreSQL
+CreateFk=1
+DefaultPkName=%0:s_PKC
+DefaultPkIndexName=%0:s_PKI
+DefaultIndexName=%0:s_IX%1:d
+DefaultFkName=%0:s_FK%1:d
+SqlSeparator=0
+UpperCaseKeyword=0
+ShowTag=1
+ShowCommonAttributes=0
+BugFixEntityWidth=1
+
+[Entity]
+PName=shop_list
+LName=店
+Comment=
+TableOption=
+Page=MAIN
+Left=2050
+Top=1350
+Field="店ID","shop_id","serial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="店名","shop_name","char(32)","NOT NULL",,"","",$FFFFFFFF,""
+Field="更新日時","modified_at","timestamp","NOT NULL",,"","",$FFFFFFFF,""
+Field="作成日時","created_at","timestamp","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$F0FBFF
+ModifiedDateTime=20220608010002
+Position="MAIN",2050,1350,601,261
+ZOrder=1
+
+[Entity]
+PName=receipt_detail
+LName=レシート_詳細
+Comment=
+TableOption=
+Page=MAIN
+Left=100
+Top=1200
+Field="レシートID","receipt_id","integer","NOT NULL",0,"","",$FFFFFFFF,""
+Field="購入品ID","product_id","serial","NOT NULL",1,"","",$FFFFFFFF,""
+Field="商品名","product_name","integer","NOT NULL",,"","",$FFFFFFFF,""
+Field="税抜き金額","price_wo_tax","integer","NOT NULL",,"","",$FFFFFFFF,""
+Field="消費税ID","tax_id","integer","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$F0FBFF
+ModifiedDateTime=20220608021105
+Position="MAIN",100,1200,529,489
+ZOrder=3
+
+[Entity]
+PName=receipt_list
+LName=レシート_リスト
+Comment=
+TableOption=
+Page=MAIN
+Left=550
+Top=2000
+Field="レシートID","receipt_id","integer","NOT NULL",0,"","",$FFFFFFFF,""
+Field="店ID","shop_id","integer","NOT NULL",,"","",$FFFFFFFF,""
+Field="購入日","purchase_date","timestamp","NOT NULL",,"","",$FFFFFFFF,""
+Field="割引額","discount","integer",,,"","",$FFFFFFFF,""
+Field="税込合計金額","total_price_with_tax","integer","NOT NULL",,"","",$FFFFFFFF,""
+Field="更新日時","modified_at","timestamp","NOT NULL",,"","",$FFFFFFFF,""
+Field="作成日時","created_at","timestamp","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$F0FBFF
+ModifiedDateTime=20220608021607
+Position="MAIN",550,2000,979,537
+ZOrder=4
+
+[Relation]
+Entity1=receipt_list
+Entity2=receipt_detail
+RelationType1=2
+RelationType2=3
+Fields1=receipt_id
+Fields2=receipt_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,3621,6379,4917,R,R,""
+Dependence=1
+Caption=
+PName=
+LineMode=0
+Bar1=362
+Bar2=638
+Bar3=492
+TermPos1=R
+TermPos2=R
+ZOrder=6
+
+[Relation]
+Entity1=shop_list
+Entity2=receipt_list
+RelationType1=2
+RelationType2=3
+Fields1=shop_id
+Fields2=shop_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,3804,6196,3692,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=380
+Bar2=620
+Bar3=369
+TermPos1=R
+TermPos2=R
+ZOrder=7
+
+[Entity]
+PName=tax_rate
+LName=税率
+Comment=
+TableOption=
+Page=MAIN
+Left=1050
+Top=1300
+Field="消費税ID","tax_id","serial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="消費税率","tax_rate","integer","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$F0FBFF
+ModifiedDateTime=20220608021308
+Position="MAIN",1050,1300,540,209
+ZOrder=8
+
+[Relation]
+Entity1=tax_rate
+Entity2=receipt_detail
+RelationType1=2
+RelationType2=3
+Fields1=tax_id
+Fields2=tax_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,920,9080,2438,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=92
+Bar2=908
+Bar3=244
+TermPos1=R
+TermPos2=R
+ZOrder=9
