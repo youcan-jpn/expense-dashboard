@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  expenses_dashboard_db:
+    container_name: expenses_dashboard_db
+    image: postgres:14.0-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ./backend/postgresql/init:/docker-entrypoint-initdb.d
+      - expenses_dashboard_db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: api_controller
+      POSTGRES_PASSWORD: password
+    restart: always
+
+  api:
+    platform: linux/x86_64
+    build:
+      context: .
+      dockerfile: docker/flask/Dockerfile
+    ports:
+      - "5001:5000"
+    volumes:
+      - "./backend/flask/src:/src"
+    tty: true
+    environment:
+      TZ: Asia/Tokyo
+      FLASK_APP: app.py
+      FLASK_ENV: development
+      HOST_NAME: postgresql
+    command: flask run -h 0.0.0.0
+    depends_on:
+      - expenses_dashboard_db
+
+volumes:
+  expenses_dashboard_db:
+    external: true
