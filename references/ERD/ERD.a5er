@@ -94,10 +94,11 @@ Field="割引額","discount","integer",,,"","",$FFFFFFFF,""
 Field="税込合計金額","total_price_with_tax","integer","NOT NULL",,"","",$FFFFFFFF,""
 Field="更新日時","modified_at","timestamp","NOT NULL",,"","",$FFFFFFFF,""
 Field="作成日時","created_at","timestamp","NOT NULL",,"","",$FFFFFFFF,""
+Field="削除済み","is_deleted","boolean","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$F0FBFF
-ModifiedDateTime=20220608021607
+ModifiedDateTime=20220608204954
 Position="MAIN",550,2000,979,537
 ZOrder=4
 
