@@ -53,7 +53,7 @@ paths:
         - Receipts
       summary: 新しいレシートを登録
       requestBody:
-        $ref: "#/components/requestBodies/NewOrUpdatedReceipt"  # TODO
+        $ref: "#/components/requestBodies/NewOrUpdatedReceipt"
       responses:
         "200":
           $ref: "#/components/responses/ReceiptDetail"
@@ -82,7 +82,7 @@ paths:
           schema:
             $ref: "#/components/schemas/receipt_id"
       requestBody:
-        $ref: "#/components/requestBodies/NewOrUpdatedReceipt"  # TODO
+        $ref: "#/components/requestBodies/NewOrUpdatedReceipt"
       responses:
         "200":
           $ref: "#/components/responses/ReceiptDetail"
@@ -115,7 +115,7 @@ paths:
         $ref: "#/components/requestBodies/UpdatedShop"
       responses:
         "200":
-          $ref: "#/components/responses/ShopList"
+          $ref: "#/components/responses/NewOrUpdatedShop"
     post:
       tags:
         - Shops
@@ -207,6 +207,14 @@ components:
           $ref: "#/components/schemas/timestamp"
         created_at:
           $ref: "#/components/schemas/timestamp"
+    shop_summary:
+      type: object
+      description: 簡易的な店情報
+      properties:
+        shop_id:
+          $ref: "#/components/schemas/shop_id"
+        shop_name:
+          $ref: "#/components/schemas/shop_name"
     shop_list:
       type: array
       description: 店一覧
@@ -301,12 +309,6 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/tax_list"
-    # ReceiptDetailList:
-    #   description: レシート詳細
-    #   content:
-    #     application/json:
-    #       schema:
-    #         $ref: "#/components/schemas/receipt_detail"
     NewTax:
       description: 新規登録された消費税
       content:
@@ -336,7 +338,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/shop_item"
+            $ref: "#/components/schemas/shop_summary"
     NewTaxRate:
       required: true
       description: 新しい消費税の種類
