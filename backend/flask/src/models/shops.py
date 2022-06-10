@@ -8,17 +8,9 @@ from .shop import Shop
 class Shops:
     shops: List[Shop] = field(default_factory=list)
 
-    def get(self):
-        raise NotImplementedError
-
     def to_list(self):
         ret = []
         for shop in self.shops:
-            obj = {
-                "shop_id": shop.shop_id,
-                "shop_name": shop.shop_name,
-                "modified_at": shop.modified_at,
-                "created_at": shop.created_at
-            }
+            obj = shop.to_dict()
             ret.append(obj)
         return ret

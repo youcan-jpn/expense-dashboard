@@ -1,15 +1,13 @@
 import json
 import os
 
-from sqlalchemy.sql.expression import select
 from dotenv import load_dotenv
-from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, update, delete
-from flask_restful import Api, Resource
-from flask import Flask, make_response, request
+from sqlalchemy import create_engine
+from flask_restful import Api
+from flask import Flask, make_response
 
-import tables
-import models
+import endpoints as ep
+
 
 # constants
 load_dotenv()
@@ -40,26 +38,8 @@ def create_app() -> Flask:
         resp.headers.extend(headers)
         return resp
 
-    @app.route("/")
-    def index():
-        return "Hello"
-
-    @app.route("/shops")
-    def shops():
-        with Session(engine) as session:
-            shop_list = []
-            stmt = (select(tables.ShopList))
-            rows = session.execute(stmt).all()
-            for row in rows:
-                shop = models.Shop(
-                   shop_name=row.ShopList.shop_name,
-                   shop_id=row.ShopList.shop_id,
-                   modified_at=row.ShopList.modified_at,
-                   created_at=row.ShopList.created_at
-                )
-                shop_list.append(shop)
-            shops = models.Shops(shops=shop_list)
-        return str(shops.to_list())
+    api.add_resource(ep.Shops, f"{route_prefix}/shops")
+    api.add_resource(ep.ShopsById, f"{route_prefix}/shops/<int:shop_id>")
     return app
 
 
