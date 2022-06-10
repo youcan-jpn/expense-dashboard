@@ -107,24 +107,33 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/ShopList"
-    patch:
-      tags:
-      - Shops
-      summary: 店名を更新
-      requestBody:
-        $ref: "#/components/requestBodies/UpdatedShop"
-      responses:
-        "200":
-          $ref: "#/components/responses/NewOrUpdatedShop"
     post:
       tags:
         - Shops
       summary: 新しい店名を登録
       requestBody:
-        $ref: "#/components/requestBodies/NewShop"
+        $ref: "#/components/requestBodies/NewOrUpdatedShop"
       responses:
         "200":
           $ref: "#/components/responses/NewOrUpdatedShop"
+  /shops/{shop_id}:
+    patch:
+      tags:
+      - Shops
+      parameters:
+        - in: path
+          name: shop_id
+          required: true
+          schema:
+            $ref: "#/components/schemas/shop_id"
+
+      summary: 店名を更新
+      requestBody:
+        $ref: "#/components/requestBodies/NewOrUpdatedShop"
+      responses:
+        "200":
+          $ref: "#/components/responses/NewOrUpdatedShop"
+
   /taxes:
     get:
       tags:
@@ -322,7 +331,7 @@ components:
           schema:
             $ref: "#/components/schemas/receipt_detail"
   requestBodies:
-    NewShop:
+    NewOrUpdatedShop:
       required: true
       description: 新しい店名
       content:
@@ -332,13 +341,6 @@ components:
             properties:
               shop_name:
                 $ref: "#/components/schemas/shop_name"
-    UpdatedShop:
-      required: true
-      description: 変更後の店名
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/shop_summary"
     NewTaxRate:
       required: true
       description: 新しい消費税の種類
