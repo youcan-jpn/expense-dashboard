@@ -50,12 +50,12 @@ Left=2050
 Top=1350
 Field="店ID","shop_id","serial","NOT NULL",0,"","",$FFFFFFFF,""
 Field="店名","shop_name","char(32)","NOT NULL",,"","",$FFFFFFFF,""
-Field="更新日時","modified_at","timestamp","NOT NULL",,"","",$FFFFFFFF,""
-Field="作成日時","created_at","timestamp","NOT NULL",,"","",$FFFFFFFF,""
+Field="更新日時","modified_at","timestamp","NOT NULL",,"now()","",$FFFFFFFF,""
+Field="作成日時","created_at","timestamp","NOT NULL",,"now()","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$F0FBFF
-ModifiedDateTime=20220608010002
+ModifiedDateTime=20220610221746
 Position="MAIN",2050,1350,601,261
 ZOrder=1
 
@@ -92,13 +92,13 @@ Field="店ID","shop_id","integer","NOT NULL",,"","",$FFFFFFFF,""
 Field="購入日","purchase_date","timestamp","NOT NULL",,"","",$FFFFFFFF,""
 Field="割引額","discount","integer",,,"","",$FFFFFFFF,""
 Field="税込合計金額","total_price_with_tax","integer","NOT NULL",,"","",$FFFFFFFF,""
-Field="更新日時","modified_at","timestamp","NOT NULL",,"","",$FFFFFFFF,""
-Field="作成日時","created_at","timestamp","NOT NULL",,"","",$FFFFFFFF,""
-Field="削除済み","is_deleted","boolean","NOT NULL",,"","",$FFFFFFFF,""
+Field="更新日時","modified_at","timestamp","NOT NULL",,"now()","",$FFFFFFFF,""
+Field="作成日時","created_at","timestamp","NOT NULL",,"now()","",$FFFFFFFF,""
+Field="削除済み","is_deleted","boolean","NOT NULL",,"FALSE","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$F0FBFF
-ModifiedDateTime=20220608204954
+ModifiedDateTime=20220610221801
 Position="MAIN",550,2000,979,537
 ZOrder=4
 
@@ -145,7 +145,7 @@ TermPos2=R
 ZOrder=7
 
 [Entity]
-PName=tax_rate
+PName=tax_list
 LName=税率
 Comment=
 TableOption=
@@ -157,12 +157,12 @@ Field="消費税率","tax_rate","integer","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$F0FBFF
-ModifiedDateTime=20220608021308
+ModifiedDateTime=20220610220622
 Position="MAIN",1050,1300,540,209
 ZOrder=8
 
 [Relation]
-Entity1=tax_rate
+Entity1=tax_list
 Entity2=receipt_detail
 RelationType1=2
 RelationType2=3

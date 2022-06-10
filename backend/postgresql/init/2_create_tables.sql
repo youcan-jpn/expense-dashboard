@@ -1,7 +1,7 @@
 -- Postgresql
 
 -- Project Name : expense-dashboard
--- Date/Time    : 2022/06/08 22:19:57
+-- Date/Time    : 2022/06/10 22:18:10
 -- Author       : Yuta Ono
 -- RDBMS Type   : PostgreSQL
 -- Application  : A5:SQL Mk-2
@@ -16,10 +16,10 @@
 
 -- 税率
 --* RestoreFromTempTable
-create table tax_rate (
+create table tax_list (
   tax_id serial not null
   , tax_rate integer not null
-  , constraint tax_rate_PKC primary key (tax_id)
+  , constraint tax_list_PKC primary key (tax_id)
 ) ;
 
 -- レシート_リスト
@@ -30,9 +30,9 @@ create table receipt_list (
   , purchase_date timestamp not null
   , discount integer
   , total_price_with_tax integer not null
-  , modified_at timestamp not null
-  , created_at timestamp not null
-  , is_deleted boolean not null
+  , modified_at timestamp default now() not null
+  , created_at timestamp default now() not null
+  , is_deleted boolean default FALSE not null
   , constraint receipt_list_PKC primary key (receipt_id)
 ) ;
 
@@ -52,13 +52,13 @@ create table receipt_detail (
 create table shop_list (
   shop_id serial not null
   , shop_name char(32) not null
-  , modified_at timestamp not null
-  , created_at timestamp not null
+  , modified_at timestamp default now() not null
+  , created_at timestamp default now() not null
   , constraint shop_list_PKC primary key (shop_id)
 ) ;
 
 alter table receipt_detail
-  add constraint receipt_detail_FK1 foreign key (tax_id) references tax_rate(tax_id);
+  add constraint receipt_detail_FK1 foreign key (tax_id) references tax_list(tax_id);
 
 alter table receipt_list
   add constraint receipt_list_FK1 foreign key (shop_id) references shop_list(shop_id);
@@ -66,9 +66,9 @@ alter table receipt_list
 alter table receipt_detail
   add constraint receipt_detail_FK2 foreign key (receipt_id) references receipt_list(receipt_id);
 
-comment on table tax_rate is '税率';
-comment on column tax_rate.tax_id is '消費税ID';
-comment on column tax_rate.tax_rate is '消費税率';
+comment on table tax_list is '税率';
+comment on column tax_list.tax_id is '消費税ID';
+comment on column tax_list.tax_rate is '消費税率';
 
 comment on table receipt_list is 'レシート_リスト';
 comment on column receipt_list.receipt_id is 'レシートID';
