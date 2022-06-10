@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List
 from .product import Product
 from .tax import Tax
@@ -8,8 +8,8 @@ from .tax import Tax
 class Receipt:
     shop_id: int = -1
     discount_price: int = -1
-    product_list: List[Product] = []
-    tax_type_list: List[Tax] = []
+    product_list: List[Product] = field(default_factory=list)
+    tax_type_list: List[Tax] = field(default_factory=list)
     receipt_id: int = -1
     total_price_include_tax: int = -1
 

@@ -20,10 +20,10 @@ engine = create_engine(DATABASE_URI, encoding="utf-8", echo=True)
 Base = declarative_base()
 metadata_obj = MetaData()
 
-taxes_table = Table("tax_rate",
+taxes_table = Table("tax_list",
                     metadata_obj,
                     autoload_with=engine)
 
 
-class TaxRate(Base):
+class TaxList(Base):
     __table__ = taxes_table

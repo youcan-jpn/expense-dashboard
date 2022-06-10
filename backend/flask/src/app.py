@@ -2,14 +2,14 @@ import json
 import os
 
 from sqlalchemy.sql.expression import select
-
 from dotenv import load_dotenv
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, update, delete
 from flask_restful import Api, Resource
 from flask import Flask, make_response, request
 
-from tables import ShopList
+import tables
+import models
 
 # constants
 load_dotenv()
@@ -47,11 +47,19 @@ def create_app() -> Flask:
     @app.route("/shops")
     def shops():
         with Session(engine) as session:
-            stmt = (select(ShopList))
+            shop_list = []
+            stmt = (select(tables.ShopList))
             rows = session.execute(stmt).all()
-            print(rows)
-        ret = {"val": str(rows[0])}
-        return ret
+            for row in rows:
+                shop = models.Shop(
+                   shop_name=row.ShopList.shop_name,
+                   shop_id=row.ShopList.shop_id,
+                   modified_at=row.ShopList.modified_at,
+                   created_at=row.ShopList.created_at
+                )
+                shop_list.append(shop)
+            shops = models.Shops(shops=shop_list)
+        return str(shops.to_list())
     return app
 
 

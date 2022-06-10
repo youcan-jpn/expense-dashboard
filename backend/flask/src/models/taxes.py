@@ -1,11 +1,11 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Dict, List
 from .tax import Tax
 
 
 @dataclass
 class Taxes:
-    taxes_list: List[Tax] = []
+    taxes_list: List[Tax] = field(default_factory=list)
     taxes_dict: Dict[int, int] = {}
 
     def __post_init__(self):
