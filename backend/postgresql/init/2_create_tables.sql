@@ -44,7 +44,7 @@ create table receipt_detail (
   , product_name integer not null
   , price_wo_tax integer not null
   , tax_id integer not null
-  , constraint receipt_detail_PKC primary key (receipt_id,product_id)
+  , primary key (receipt_id,product_id)
 ) ;
 
 -- 店
@@ -54,7 +54,7 @@ create table shop_list (
   , shop_name char(32) not null
   , modified_at timestamp default now() not null
   , created_at timestamp default now() not null
-  , constraint shop_list_PKC primary key (shop_id)
+  , primary key (shop_id)
 ) ;
 
 alter table receipt_detail

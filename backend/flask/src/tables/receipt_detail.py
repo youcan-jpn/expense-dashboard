@@ -15,15 +15,14 @@ port = os.getenv("API_PORT", 5432)
 db = os.getenv("DB_NAME")
 
 DATABASE_URI = f"{dialect}+{driver}://{username}:{password}@{host}:{port}/{db}"  # noqa: E501
-engine = create_engine(DATABASE_URI, encoding="utf-8", echo=True)
 
 engine = create_engine(DATABASE_URI, encoding="utf-8", echo=True)
-
 Base = declarative_base()
 metadata_obj = MetaData()
+
 receipt_detail_table = Table("receipt_detail",
                              metadata_obj,
-                             autoloaded_with=engine)
+                             autoload_with=engine)
 
 
 class ReceiptDetail(Base):
