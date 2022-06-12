@@ -142,24 +142,46 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/TaxList"
-    put:
-      tags:
-        - Taxes
-      summary: 消費税率を更新
-      requestBody:
-        $ref: "#/components/requestBodies/UpdatedTax"
-      responses:
-        "200":
-          $ref: "#/components/schemas/tax_item"
     post:
       tags:
         - Taxes
       summary: 新しい消費税率を登録
       requestBody:
-        $ref: "#/components/requestBodies/NewTaxRate"
+        $ref: "#/components/requestBodies/NewOrUpdatedTaxRate"
       responses:
         "200":
-          $ref: "#/components/responses/NewTax"
+          $ref: "#/components/responses/NewOrUpdatedTax"
+
+  /taxes/{tax_id}:
+    put:
+      tags:
+        - Taxes
+      parameters:
+        - in: path
+          name: tax_id
+          required: true
+          schema:
+            $ref: "#/components/schemas/tax_id"
+      summary: 税IDを指定して更新
+      requestBody:
+        $ref: "#/components/requestBodies/NewOrUpdatedTaxRate"
+      responses:
+        "200":
+          $ref: "#/components/responses/NewOrUpdatedTax"
+    # delete:
+    #   tags:
+    #     - Taxes
+    #   parameters:
+    #     - in: path
+    #       name: tax_id
+    #       required: true
+    #       schema:
+    #         $ref: "#/components/schemas/tax_id"
+    #   summary: 税IDを指定して削除
+    #   responses:
+    #     "200":
+    #       description: The resource was deleted successefully.
+
 components:
   schemas:
     shop_id:
@@ -318,8 +340,8 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/tax_list"
-    NewTax:
-      description: 新規登録された消費税
+    NewOrUpdatedTax:
+      description: 新規登録もしくは更新された消費税
       content:
         application/json:
           schema:
@@ -341,9 +363,9 @@ components:
             properties:
               shop_name:
                 $ref: "#/components/schemas/shop_name"
-    NewTaxRate:
+    NewOrUpdatedTaxRate:
       required: true
-      description: 新しい消費税の種類
+      description: 新しいもしくは更新後の消費税率
       content:
         application/json:
           schema:
@@ -351,13 +373,6 @@ components:
             properties:
               tax_rate:
                 $ref: "#/components/schemas/tax_rate"
-    UpdatedTax:
-      required: true
-      description: 更新後の消費税
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/tax_item"
     NewOrUpdatedReceipt:
       required: true
       description: 新規登録されたレシート
