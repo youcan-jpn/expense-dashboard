@@ -40,6 +40,8 @@ def create_app() -> Flask:
 
     api.add_resource(ep.Shops, f"{route_prefix}/shops")
     api.add_resource(ep.ShopsById, f"{route_prefix}/shops/<int:shop_id>")
+    api.add_resource(ep.Taxes, f"{route_prefix}/taxes")
+    api.add_resource(ep.TaxesById, f"{route_prefix}/taxes/<int:tax_id>")
     return app
 
 

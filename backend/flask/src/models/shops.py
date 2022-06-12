@@ -11,6 +11,5 @@ class Shops:
     def to_list(self):
         ret = []
         for shop in self.shops:
-            obj = shop.to_dict()
-            ret.append(obj)
+            ret.append(shop.to_dict())
         return ret
