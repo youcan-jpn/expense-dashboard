@@ -25,9 +25,9 @@ create table tax_list (
 -- レシート_リスト
 --* RestoreFromTempTable
 create table receipt_list (
-  receipt_id integer not null
+  receipt_id serial not null
   , shop_id integer not null
-  , purchase_date timestamp not null
+  , purchase_date timestamp  default now () not null
   , discount integer
   , total_price_with_tax integer not null
   , modified_at timestamp default now() not null
@@ -41,7 +41,7 @@ create table receipt_list (
 create table receipt_detail (
   receipt_id integer not null
   , product_id serial not null
-  , product_name integer not null
+  , product_name char(32) not null
   , price_wo_tax integer not null
   , tax_id integer not null
   , primary key (receipt_id,product_id)
