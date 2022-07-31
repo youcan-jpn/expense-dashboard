@@ -281,7 +281,7 @@ components:
           $ref: "#/components/schemas/date"
         discount_price:
           $ref: "#/components/schemas/price"
-        total_price_includes_tax:
+        total_price_including_tax:
           $ref: "#/components/schemas/price"
         modified_at:
           $ref: "#/components/schemas/date"

@@ -8,5 +8,8 @@ from .receipt import Receipt
 class Receipts:
     receipts: List[Receipt]
 
-    def get(self):
-        raise NotImplementedError
+    def to_list(self) -> List[Receipt]:
+        ret = []
+        for receipt in self.receipts:
+            ret.append(receipt.to_simple_dict())
+        return ret

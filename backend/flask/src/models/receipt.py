@@ -1,35 +1,43 @@
 from dataclasses import dataclass, field
-from typing import List
-from .product import Product
-from .tax import Tax
+from .products import Products
+from datetime import datetime
 
 
 @dataclass
 class Receipt:
-    shop_id: int = -1
-    discount_price: int = -1
-    product_list: List[Product] = field(default_factory=list)
-    tax_type_list: List[Tax] = field(default_factory=list)
     receipt_id: int = -1
-    total_price_include_tax: int = -1
+    shop_id: int = -1
+    shop_name: str = "unknown"
+    purchase_date: datetime = datetime.now()
+    discount_price: int = -1
+    created_at: datetime = datetime.now()
+    modified_at: datetime = datetime.now()
+    product_list: Products = field(default_factory=list)
+    total_price_including_tax: int = -1
 
-    def post(self):
-        raise NotImplementedError
+    def to_detailed_dict(self) -> dict:
+        ret = {
+            "receipt_id": self.receipt_id,
+            "shop_id": self.shop_id,
+            "shop_name": self.shop_name,
+            "purchase_date": self.purchase_date,
+            "discount_price": self.discount_price,
+            "total_price_including_tax": self.total_price_include_tax,
+            "modified_at": self.modified_at,
+            "created_at": self.created_at,
+            "product_list": self.product_list.to_list()
+        }
+        return ret
 
-    def get(self):
-        raise NotImplementedError
-
-    def delete(self):
-        raise NotImplementedError
-
-    def patch(self):
-        if self.receipt_id != -1:
-            pass
-        pass
-        raise NotImplementedError
-
-    def _validate_properties(self) -> bool:
-        raise NotImplementedError
-
-    def _calculate_total_price(self) -> int:
-        raise NotImplementedError
+    def to_simple_dict(self) -> dict:
+        ret = {
+            "receipt_id": self.receipt_id,
+            "shop_id": self.shop_id,
+            "shop_name": self.shop_name,
+            "purchase_date": self.purchase_date,
+            "discount_price": self.discount_price,
+            "total_price_including_tax": self.total_price_include_tax,
+            "modified_at": self.modified_at,
+            "created_at": self.created_at,
+        }
+        return ret
