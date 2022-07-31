@@ -38,6 +38,7 @@ def create_app() -> Flask:
         resp.headers.extend(headers)
         return resp
 
+    api.add_resource(ep.Receipts, f"{route_prefix}/receipts")
     api.add_resource(ep.Shops, f"{route_prefix}/shops")
     api.add_resource(ep.ShopsById, f"{route_prefix}/shops/<int:shop_id>")
     api.add_resource(ep.Taxes, f"{route_prefix}/taxes")
