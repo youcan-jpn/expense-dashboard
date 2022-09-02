@@ -1,4 +1,4 @@
-export const Receipts = () => {
+export const ReceiptPage = () => {
   return (
     <>
       <main>
