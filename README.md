@@ -15,3 +15,18 @@
 
 ## NOTES
 - ERDは一部正規化しきっていないところがある
+
+## DIARY
+### 2022/09/02
+- POST /receipts, DELETE /receipts/{receipt_id}を実装してフロントエンドの実装に移った
+- ルーティングの設定を簡単にして、navBarを作成した
+- shopの一覧を表示するページを作成した
+- POST /shopsを利用するフォームを作成したがCORSによりうまく動かない
+- axiosでapiを叩くときにCORSでエラーが出る
+  - flask-corsを導入することでGET時のエラーはなくなった
+  - POST時はいまだにエラーが出る
+    - "No 'Access-Control-Allow-Origin' header is present on the requested resource."
+    - [このページ](https://melheaven.hatenadiary.jp/entry/react-flask-cors)の方法がPOSTにも対応していると色々なページに書いてあったが手元の環境ではうまくいかなかった
+    - [このページ](https://stackoverflow.com/questions/39550920/flask-cors-not-working-for-post-but-working-for-get)もだめ
+    - 最悪docker-composeでreactを動かしてnetworkを使えば回避できそう
+    - Nginxのコンテナを用意してbuildした後のファイルを置く形でもいいが動かしながら開発するのがめんどくさそう
