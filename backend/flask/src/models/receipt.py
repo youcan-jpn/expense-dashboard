@@ -20,11 +20,11 @@ class Receipt:
             "receipt_id": self.receipt_id,
             "shop_id": self.shop_id,
             "shop_name": self.shop_name,
-            "purchase_date": self.purchase_date,
+            "purchase_date": self.purchase_date.strftime("%Y-%m-%d"),
             "discount_price": self.discount_price,
-            "total_price_including_tax": self.total_price_include_tax,
-            "modified_at": self.modified_at,
-            "created_at": self.created_at,
+            "total_price_including_tax": self.total_price_including_tax,
+            "modified_at": self.modified_at.strftime("%Y-%m-%d %H:%M:%S"),
+            "created_at": self.created_at.strftime("%Y-%m-%d %H:%M:%S"),
             "product_list": self.product_list.to_list()
         }
         return ret

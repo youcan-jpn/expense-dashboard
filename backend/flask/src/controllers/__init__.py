@@ -7,3 +7,4 @@ from .post_taxes import post_taxes
 from .put_taxes_by_id import put_taxes_by_id
 
 from .get_receipts import get_receipts
+from .post_receipts import post_receipts
