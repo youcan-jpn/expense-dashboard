@@ -226,6 +226,11 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/tax_item"
+    tax_list_res:
+      type: object
+      properties:
+        taxes:
+          $ref: "#/components/schemas/tax_list"
     shop_item:
       type: object
       description: 店情報
@@ -251,6 +256,11 @@ components:
       description: 店一覧
       items:
         $ref: "#/components/schemas/shop_item"
+    shop_list_res:
+      type: object
+      properties:
+        shops:
+          $ref: "#/components/schemas/shop_list"
     product_item:
       type: object
       description: 商品リストの1要素
@@ -315,13 +325,18 @@ components:
       description: レシート一覧
       items:
         $ref: "#/components/schemas/receipt_item"
+    receipt_list_res:
+      type: object
+      properties:
+        receipts:
+          $ref: "#/components/schemas/receipt_list"
   responses:
     ReceiptList:
       description: 条件を満たすレシートの一覧
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/receipt_list"
+            $ref: "#/components/schemas/receipt_list_res"
     NewOrUpdatedShop:
       description: 新規登録もしくは更新された店情報
       content:
@@ -333,13 +348,13 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/shop_list"
+            $ref: "#/components/schemas/shop_list_res"
     TaxList:
       description: 消費税の種類一覧
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/tax_list"
+            $ref: "#/components/schemas/tax_list_res"
     NewOrUpdatedTax:
       description: 新規登録もしくは更新された消費税
       content:

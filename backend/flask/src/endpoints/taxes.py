@@ -7,7 +7,7 @@ import controllers
 class Taxes(Resource):
     def get(self):
         ret = controllers.get_taxes()
-        return ret
+        return {"taxes": ret}
 
     def post(self):
         ret = controllers.post_taxes(tax_rate=int(request.json["tax_rate"]))  # TODO: エラー処理

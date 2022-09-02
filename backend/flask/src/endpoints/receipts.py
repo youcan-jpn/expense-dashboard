@@ -6,10 +6,11 @@ from flask_restful import Resource
 import controllers
 import models
 
+
 class Receipts(Resource):
     def get(self):
         ret = controllers.get_receipts()
-        return ret
+        return {"receipts": ret}
 
     def post(self):
         shop_id = int(request.json["shop_id"])
