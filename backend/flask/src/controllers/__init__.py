@@ -8,3 +8,4 @@ from .put_taxes_by_id import put_taxes_by_id
 
 from .get_receipts import get_receipts
 from .post_receipts import post_receipts
+from .delete_receipts_by_id import delete_receipts_by_id
