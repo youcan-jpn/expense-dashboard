@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Routes, Route } from "react-router-dom";
+
+import { ResponsiveMenuBar } from './components/ui/MenuBar';
+import { Home } from "./components/pages/Home";
+import { Shops } from "./components/pages/Shops";
+import { Receipts } from './components/pages/Receipts';
+
 import './App.css';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ResponsiveMenuBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="shops" element={<Shops />} />
+        <Route path="receipts" element={<Receipts />} />
+      </Routes>
     </div>
   );
 }
+
 
 export default App;
