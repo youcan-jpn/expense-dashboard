@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from flask_restful import Api
+from flask_cors import CORS
 from flask import Flask, make_response
 
 import endpoints as ep
@@ -48,6 +49,7 @@ def create_app() -> Flask:
 
 
 app = create_app()
+CORS(app, origins=["http://localhost:3000"])
 
 if __name__ == "__main__":
     app.run()
