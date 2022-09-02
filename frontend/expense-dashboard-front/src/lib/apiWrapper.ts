@@ -22,7 +22,7 @@ const apiWrapper = axios.create({
   baseURL: 'http://localhost:5001/api',
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'http://localhost:3000'
+    'Access-Control-Allow-Origin': 'http://localhost:3000',
   },
   responseType: 'json'
 });

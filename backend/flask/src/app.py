@@ -27,6 +27,7 @@ engine = create_engine(DATABASE_URI, encoding="utf-8", echo=True)
 def create_app() -> Flask:
     app = Flask(__name__)
     app.config["JSON_AS_ASCII"] = False
+    app.config['CORS_HEADERS'] = 'Content-Type'
 
     api = Api(app)
     route_prefix: str = "/api"
@@ -49,7 +50,7 @@ def create_app() -> Flask:
 
 
 app = create_app()
-CORS(app, origins=["http://localhost:3000"])
+CORS(app, origins=["http://localhost:3000"], supports_credentials=True)
 
 if __name__ == "__main__":
     app.run()
