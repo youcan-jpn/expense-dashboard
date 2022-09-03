@@ -46,9 +46,11 @@ export const ShopPage = () => {
         <ShopTable shops={shopList} />
         <AddShopDialog
           open={showModal}
+          usage='add'
           openSetter={setShowModal}
           postHandler={handlePost}
           changeHandler={handleChange}
+          placeHolder="new shop"
         />
       </main>
       <PlusButton onClick={() => setShowModal(true)} disabled={false}/>

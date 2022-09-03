@@ -12,22 +12,34 @@ interface IProps {
   openSetter: (state: boolean) => void,
   postHandler: () => void,
   changeHandler: (e: any) => void,
+  placeHolder: string
+  usage: 'add' | 'alter'
 }
 export const AddShopDialog = (props: IProps) => {
-  const { open, openSetter, postHandler, changeHandler } = props;
+  const { open, usage, placeHolder, openSetter, postHandler, changeHandler } = props;
+  let title = 'Title'
+  let message = 'message here'
+
+  if (usage === 'add') {
+    title = 'Add New Shop';
+    message = "Enter new shop's name"
+  } else if (usage === 'alter') {
+    title = 'Alter Shop Name';
+    message = "Enter new shop name"
+  }
 
   return (
     <Dialog open={open} onClose={() => openSetter(false)}>
     <DialogTitle id="add-shop-dialog">
-      Add New Shop
+      {title}
     </DialogTitle>
     <DialogContent>
       <DialogContentText id="add-shop-dialog-description">
-        Enter new shop's name
+        {message}
       </DialogContentText>
     </DialogContent>
     <DialogActions>
-      <Input placeholder='new shop' type="text" id="newShopName" onChange={changeHandler}/>
+      <Input placeholder={placeHolder} type="text" id="newShopName" onChange={changeHandler}/>
       <Button onClick={postHandler}><SendIcon /></Button>
     </DialogActions>
   </Dialog>

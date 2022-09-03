@@ -25,3 +25,12 @@ export const postShop: ApiFunction<null, Payload, Result<ShopsRes, unknown>> = a
     return failure({ err })
   }
 };
+
+export const patchShop: ApiFunction<number, Payload, Result<ShopsRes, unknown>> = async (shop_id, payload) => {
+  try {
+    const response = await api.patch(`/shops/${shop_id}`, payload)
+    return success(response.data)
+  } catch (err) {
+    return failure({ err })
+  }
+};

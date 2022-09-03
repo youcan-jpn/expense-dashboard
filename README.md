@@ -23,6 +23,10 @@
 - flask側のエラーメッセージを確認したところ、{"shop_name": "sample_name"}のようにわたさなければいけないところを{"shop_name": {"shop_name": "sample_name"}}を渡してしまっていることに気が付いた
   - typescriptを書くときにミスしていた
   - postmanでは正しく送信できていたので、まずTS側の間違えを疑うべきだった
+- shop_nameのPATCH処理を実装した
+  - PATCHの後、再レンダリングされない
+    - Shop.pageのshopListに依存
+    - recoilとかuseContextを使う？
 ### 2022/09/02
 - POST /receipts, DELETE /receipts/{receipt_id}を実装してフロントエンドの実装に移った
 - ルーティングの設定を簡単にして、navBarを作成した
