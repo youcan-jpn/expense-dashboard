@@ -17,11 +17,9 @@ export const getShops: ApiFunction<null, null, Result<ShopsRes, unknown>> = asyn
   }
 };
 
-export const postShop: ApiFunction<null, Payload, Result<ShopsRes, unknown>> = async (_, shop_name) => {
+export const postShop: ApiFunction<null, Payload, Result<ShopsRes, unknown>> = async (_, payload) => {
   try {
-    const response = await api.post('/shops', {
-      shop_name: shop_name
-    })
+    const response = await api.post('/shops', payload)
     return success(response.data)
   } catch (err) {
     return failure({ err })

@@ -17,6 +17,12 @@
 - ERDは一部正規化しきっていないところがある
 
 ## DIARY
+
+### 2022/09/03
+- nodeのコンテナを用意してreactを動かしたところ同じCORSエラーが出た
+- flask側のエラーメッセージを確認したところ、{"shop_name": "sample_name"}のようにわたさなければいけないところを{"shop_name": {"shop_name": "sample_name"}}を渡してしまっていることに気が付いた
+  - typescriptを書くときにミスしていた
+  - postmanでは正しく送信できていたので、まずTS側の間違えを疑うべきだった
 ### 2022/09/02
 - POST /receipts, DELETE /receipts/{receipt_id}を実装してフロントエンドの実装に移った
 - ルーティングの設定を簡単にして、navBarを作成した

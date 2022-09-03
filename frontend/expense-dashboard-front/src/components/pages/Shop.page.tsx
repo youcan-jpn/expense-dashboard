@@ -19,6 +19,14 @@ export const ShopPage = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [newShopName, setNewShopName] = useState<string>("");
 
+  const fetchData = async () => {
+    const res = await getShops(null);
+    if (res.isSuccess === true) {
+      const {shops} = res;
+      setShopList(shops);
+    }
+  }
+
   const handleChange = (e: any) => {
     setNewShopName(() => e.target.value);  // TODO: useRefを使った方がよさそう
   }
@@ -27,22 +35,15 @@ export const ShopPage = () => {
     const payload = {
       "shop_name": newShopName
     }
-    console.log(payload);
     const res = await postShop(null, payload);
     if (!res.isSuccess) {
       console.log(res);
     }
+    fetchData()
     setShowModal(false);
   }
 
   useEffect(() => {
-    async function fetchData () {
-      const res = await getShops(null);
-      if (res.isSuccess === true) {
-        const {shops} = res;
-        setShopList(shops);
-      }
-    }
     fetchData()
   }, []);
 
