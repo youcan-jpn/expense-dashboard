@@ -1,4 +1,4 @@
-type ShopId = number;
+export type ShopId = number;
 type Date = string;
 
 export type Shop = {
