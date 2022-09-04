@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,19 +10,20 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import IconButton from '@mui/material/IconButton';
 import { Shop } from '../../../domains/shops';
 import { AddShopDialog } from './AddShopDialog';
-import { patchShop } from '../../../api/shops';
-
+import { patchShop, getShops } from '../../../api/shops';
+import { shopContext } from '../../pages/Shop.page';
 
 interface Prop {
   shops: Shop[]
 }
+
 export const ShopTable: React.FC<Prop> = (prop: Prop) => {
   const { shops } = prop;
   const [ openDialog, setOpenDialog ] = useState<boolean>(false);
   const [ placeHolder, setPlaceHolder ] = useState<string>("")
   const [ targetId, setTargetId ] = useState<number>(0);
-  const [ newName, setNewName ] = useState<string>("")
-
+  const [ newName, setNewName ] = useState<string>("");
+  const setShopList = useContext(shopContext);
   const clickHandler = (shop_name: string, shop_id: number) => {
     setPlaceHolder(()=>shop_name);
     setTargetId(() => shop_id);
@@ -38,6 +39,14 @@ export const ShopTable: React.FC<Prop> = (prop: Prop) => {
     const res = await patchShop(targetId, payload);
     if (!res.isSuccess) {
       console.log(res);
+    }
+    // Shop.pageのfetchDataを使いまわした方が良い
+    const shopRes = await getShops(null);
+    if (shopRes.isSuccess === true) {
+      const {shops} = shopRes;
+      setShopList(shops);
+    } else {
+      console.log(shopRes);
     }
     setOpenDialog(false);
   }

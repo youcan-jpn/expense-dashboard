@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, createContext } from 'react';
 
 import { getShops, postShop } from '../../api/shops';
 import { Shop } from '../../domains/shops';
 import { ShopTable } from '../models/shops/ShopTable';
 import { AddShopDialog } from '../models/shops/AddShopDialog';
 import { PlusButton } from '../ui/PlusButton';
+
+export const shopContext = createContext({} as React.Dispatch<React.SetStateAction<Shop[]>>);
 
 export const ShopPage = () => {
   const [shopList, setShopList] = useState<Shop[]>([]);
@@ -43,7 +45,9 @@ export const ShopPage = () => {
     <>
       <main>
         <h2>Shops</h2>
-        <ShopTable shops={shopList} />
+        <shopContext.Provider value={setShopList}>
+          <ShopTable shops={shopList} />
+        </shopContext.Provider>
         <AddShopDialog
           open={showModal}
           usage='add'
