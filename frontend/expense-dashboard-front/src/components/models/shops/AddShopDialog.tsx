@@ -29,7 +29,7 @@ export const AddShopDialog = (props: IProps) => {
   }
 
   return (
-    <Dialog open={open} onClose={() => openSetter(false)}>
+  <Dialog open={open} onClose={() => openSetter(false)}>
     <DialogTitle id="add-shop-dialog">
       {title}
     </DialogTitle>
