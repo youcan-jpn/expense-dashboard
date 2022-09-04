@@ -15,3 +15,32 @@
 
 ## NOTES
 - ERDは一部正規化しきっていないところがある
+
+## DIARY
+### 2022/09/04
+- PATCHの後再レンダリングされるようにした
+- 今回はコンポーネントに普通に関数を渡すだけでも良さそうだったが、将来的にもうすこしコンポーネントを分離することを想定してuseContextを用いた
+- TODO: プラスボタンや名前変更ボタンを押した後のダイアログでinput要素に自動でフォーカスされるようにしたい
+  - autoFocus={true}ではだめ
+### 2022/09/03
+- nodeのコンテナを用意してreactを動かしたところ同じCORSエラーが出た
+- flask側のエラーメッセージを確認したところ、{"shop_name": "sample_name"}のようにわたさなければいけないところを{"shop_name": {"shop_name": "sample_name"}}を渡してしまっていることに気が付いた
+  - typescriptを書くときにミスしていた
+  - postmanでは正しく送信できていたので、まずTS側の間違えを疑うべきだった
+- shop_nameのPATCH処理を実装した
+  - PATCHの後、再レンダリングされない
+    - Shop.pageのshopListに依存
+    - recoilとかuseContextを使う？
+### 2022/09/02
+- POST /receipts, DELETE /receipts/{receipt_id}を実装してフロントエンドの実装に移った
+- ルーティングの設定を簡単にして、navBarを作成した
+- shopの一覧を表示するページを作成した
+- POST /shopsを利用するフォームを作成したがCORSによりうまく動かない
+- axiosでapiを叩くときにCORSでエラーが出る
+  - flask-corsを導入することでGET時のエラーはなくなった
+  - POST時はいまだにエラーが出る
+    - "No 'Access-Control-Allow-Origin' header is present on the requested resource."
+    - [このページ](https://melheaven.hatenadiary.jp/entry/react-flask-cors)の方法がPOSTにも対応していると色々なページに書いてあったが手元の環境ではうまくいかなかった
+    - [このページ](https://stackoverflow.com/questions/39550920/flask-cors-not-working-for-post-but-working-for-get)もだめ
+    - 最悪docker-composeでreactを動かしてnetworkを使えば回避できそう
+    - Nginxのコンテナを用意してbuildした後のファイルを置く形でもいいが動かしながら開発するのがめんどくさそう

@@ -7,7 +7,7 @@ import controllers
 class Shops(Resource):
     def get(self):
         ret = controllers.get_shops()
-        return ret
+        return {"shops": ret}
 
     def post(self):
         ret = controllers.post_shops(request.json["shop_name"])
