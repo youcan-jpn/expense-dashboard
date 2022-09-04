@@ -20,6 +20,12 @@ export const AddShopDialog = (props: IProps) => {
   let title = 'Title'
   let message = 'message here'
 
+  const pressEnterToPost = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      postHandler()
+    }
+  }
+
   if (usage === 'add') {
     title = 'Add New Shop';
     message = "Enter new shop's name"
@@ -39,7 +45,13 @@ export const AddShopDialog = (props: IProps) => {
       </DialogContentText>
     </DialogContent>
     <DialogActions>
-      <Input placeholder={placeHolder} type="text" id="newShopName" onChange={changeHandler}/>
+      <Input
+        placeholder={placeHolder}
+        type="text"
+        id="newShopName"
+        onChange={changeHandler}
+        onKeyDown={pressEnterToPost}
+      />
       <Button onClick={postHandler}><SendIcon /></Button>
     </DialogActions>
   </Dialog>
