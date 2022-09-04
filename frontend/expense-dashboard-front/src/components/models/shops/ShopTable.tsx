@@ -10,7 +10,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import IconButton from '@mui/material/IconButton';
 import { Shop } from '../../../domains/shops';
 import { AddShopDialog } from './AddShopDialog';
-import { patchShop, getShops } from '../../../api/shops';
+import { patchShop } from '../../../api/shops';
 import { shopContext } from '../../pages/Shop.page';
 
 interface Prop {
@@ -23,7 +23,7 @@ export const ShopTable: React.FC<Prop> = (prop: Prop) => {
   const [ placeHolder, setPlaceHolder ] = useState<string>("")
   const [ targetId, setTargetId ] = useState<number>(0);
   const [ newName, setNewName ] = useState<string>("");
-  const setShopList = useContext(shopContext);
+  const fetchShopList = useContext(shopContext);
   const clickHandler = (shop_name: string, shop_id: number) => {
     setPlaceHolder(()=>shop_name);
     setTargetId(() => shop_id);
@@ -40,14 +40,7 @@ export const ShopTable: React.FC<Prop> = (prop: Prop) => {
     if (!res.isSuccess) {
       console.log(res);
     }
-    // Shop.pageのfetchDataを使いまわした方が良い
-    const shopRes = await getShops(null);
-    if (shopRes.isSuccess === true) {
-      const {shops} = shopRes;
-      setShopList(shops);
-    } else {
-      console.log(shopRes);
-    }
+    fetchShopList()
     setOpenDialog(false);
   }
   return (
