@@ -32,7 +32,14 @@ export const ReceiptTable: React.FC<Prop> = (prop: Prop) => {
   const HandleClose = () => {
     setOpenMenu(false);
     setAnchorEl(null);
-  }
+  };
+
+  const displayDate = (date_string: string) => {
+    const date_object = new Date(date_string);
+    const ret = date_object.toLocaleDateString();
+    return ret;
+  };
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -56,10 +63,10 @@ export const ReceiptTable: React.FC<Prop> = (prop: Prop) => {
                   {row.shop_name}
                 </TableCell>
                 <TableCell align="center">
-                  {row.total_price_including_tax}
+                  {Number(row.total_price_including_tax).toLocaleString()}円
                 </TableCell>
                 <TableCell align="center">
-                  {row.purchase_date}
+                  {displayDate(row.purchase_date)}
                 </TableCell>
                 <TableCell align="right">
                   <IconButton onClick={(e) => HandleOpenMenu(e, row.receipt_id)}>
