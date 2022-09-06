@@ -21,9 +21,12 @@ export type Receipt = {
     total_price_including_tax: Price,
     modified_at: DateTime,
     created_at: DateTime,
-    product_list: Product[]
 };
 
 export type ReceiptsRes = {
-    "receipts": Receipt[]
+    receipts: Receipt[]
+};
+
+export type ReceiptDetailRes = Receipt & {
+  product_list: Product[]
 };
