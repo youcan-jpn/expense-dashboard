@@ -1,4 +1,5 @@
 import { useEffect, useState, createContext } from 'react';
+import { Box, Typography } from '@mui/material';
 
 import { getShops, postShop } from '../../api/shops';
 import { Shop } from '../../domains/shops';
@@ -43,8 +44,8 @@ export const ShopPage = () => {
 
   return (
     <>
-      <main>
-        <h2>Shops</h2>
+      <Box component="main">
+        <Typography variant='h2'>Shops</Typography>
         <shopContext.Provider value={fetchShopList}>
           <ShopTable shops={shopList} />
         </shopContext.Provider>
@@ -56,7 +57,7 @@ export const ShopPage = () => {
           changeHandler={handleChange}
           placeHolder="new shop"
         />
-      </main>
+      </Box>
       <PlusButton onClick={() => setShowModal(true)} disabled={false}/>
     </>
   );
