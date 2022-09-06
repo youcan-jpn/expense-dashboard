@@ -6,6 +6,7 @@ import { ResponsiveMenuBar } from './components/ui/MenuBar';
 import { HomePage } from "./components/pages/Home.page";
 import { ShopPage } from "./components/pages/Shop.page";
 import { ReceiptPage } from './components/pages/Receipt.page';
+import { ReceiptViewerPage } from './components/pages/ReceiptViewer.page';
 
 import './App.css';
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/shops" element={<ShopPage />} />
         <Route path="/receipts" element={<ReceiptPage />} />
+        <Route path="/receipts/:receipt_id" element={<ReceiptViewerPage />} />
       </Routes>
     </Box>
   );

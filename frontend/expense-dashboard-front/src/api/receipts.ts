@@ -1,7 +1,7 @@
 import api, { ApiFunction, Result, success, failure } from '../lib/apiWrapper';
 
 import type {
-  ReceiptsRes, ReceiptId
+  ReceiptsRes, ReceiptId, ReceiptDetailRes
 } from '../domains/receipts'
 
 export const getReceipts: ApiFunction<null, null, Result<ReceiptsRes, unknown>> = async () => {
@@ -22,7 +22,7 @@ export const deleteReceiptById: ApiFunction<ReceiptId, null, Result<unknown, unk
   }
 };
 
-export const getReceiptById: ApiFunction<ReceiptId, null, Result<undefined, unknown>> = async (receipt_id) => {
+export const getReceiptById: ApiFunction<ReceiptId, null, Result<ReceiptDetailRes, unknown>> = async (receipt_id) => {
   try {
     const response = await api.get(`/receipts/${receipt_id}`);
     return success(response.data);

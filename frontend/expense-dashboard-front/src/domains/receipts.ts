@@ -3,11 +3,11 @@ import type { ShopId } from './shops';
 export type ReceiptId = number
 type Date = string;
 type DateTime = string;
-type Price = number;
+export type Price = number;
 
 export type Product = {
     product_id: number,
-    product_name: number,
+    product_name: string,
     price_wo_tax: Price,
     tax_id: number
 };
