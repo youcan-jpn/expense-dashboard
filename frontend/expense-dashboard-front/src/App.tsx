@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from "react-router-dom";
+import { Box } from '@mui/material';
 
 import { ResponsiveMenuBar } from './components/ui/MenuBar';
 import { HomePage } from "./components/pages/Home.page";
@@ -11,14 +12,14 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <Box className="App">
       <ResponsiveMenuBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="shops" element={<ShopPage />} />
-        <Route path="receipts" element={<ReceiptPage />} />
+        <Route path="/shops" element={<ShopPage />} />
+        <Route path="/receipts" element={<ReceiptPage />} />
       </Routes>
-    </div>
+    </Box>
   );
 }
 
