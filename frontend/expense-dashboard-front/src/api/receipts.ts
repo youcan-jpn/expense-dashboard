@@ -20,4 +20,13 @@ export const deleteReceiptById: ApiFunction<ReceiptId, null, Result<unknown, unk
   } catch (err) {
     return failure({ err });
   }
-}
+};
+
+export const getReceiptById: ApiFunction<ReceiptId, null, Result<undefined, unknown>> = async (receipt_id) => {
+  try {
+    const response = await api.get(`/receipts/${receipt_id}`);
+    return success(response.data);
+  } catch (err) {
+    return failure({ err });
+  }
+};
