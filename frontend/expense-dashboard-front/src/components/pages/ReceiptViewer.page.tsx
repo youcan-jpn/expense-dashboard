@@ -14,9 +14,12 @@ export const ReceiptViewerPage = () => {
   const [receipt, setReceipt] = useState<Success<ReceiptDetailRes>>({} as Success<ReceiptDetailRes>)
 
   const fetchReceipt = async () => {
+    console.log("fetching receipt")
     const res = await getReceiptById(receipt_id);
+    console.log("fetched receipt")
     if (res.isSuccess) {
-      setReceipt(res);
+      setReceipt(() => res);
+      console.log(`receipt viewer:${res}`);
     } else {
       console.log(res);
     }
@@ -32,6 +35,8 @@ export const ReceiptViewerPage = () => {
         <Typography variant="h2">Receipt Viewer</Typography>
         <Typography>ID: {receipt_id}</Typography>
         <Typography>購入場所: {receipt.shop_name}</Typography>
+        <Typography>登録日時：{receipt.created_at}</Typography>
+        <Typography>最終更新：{receipt.modified_at}</Typography>
         <ProductCardList products={receipt.product_list} />
       </Box>
     </>

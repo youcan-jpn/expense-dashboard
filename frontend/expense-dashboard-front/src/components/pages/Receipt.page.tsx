@@ -11,7 +11,7 @@ export const ReceiptPage = () => {
   const [ receiptList, setReceiptList ] = useState<Receipt[]>([]);
   const fetchReceiptList = async () => {
     const res = await getReceipts(null);
-    if (res.isSuccess === true) {
+    if (res.isSuccess) {
       const {receipts} = res;
       setReceiptList(receipts);
     }

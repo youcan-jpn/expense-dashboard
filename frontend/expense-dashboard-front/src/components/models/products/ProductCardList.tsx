@@ -10,10 +10,12 @@ interface IProps {
 
 export const ProductCardList: React.FC<IProps> = (props: IProps) => {
   const { products } = props;
+  console.log(`card list:${products}`)
   return (
     <Box>
       {products.map((product: Product) =>
         <ProductCard
+          key={product.product_id}
           product_id={product.product_id}
           product_name={product.product_name}
           price_wo_tax={product.price_wo_tax}

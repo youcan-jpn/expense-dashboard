@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
 import Menu from '@mui/material/Menu';
@@ -39,12 +40,14 @@ const ReceiptMenu: React.FC<IProps> = (props) => {
         anchorEl={anchorEl}
         onClose={onClose}
       >
-        <MenuItem>
-          <ListItemIcon>
-            <LoupeIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>View Detail</ListItemText>
-        </MenuItem>
+        <Link to={`/receipts/${receipt_id}`}>
+          <MenuItem>
+            <ListItemIcon>
+              <LoupeIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>View Detail</ListItemText>
+          </MenuItem>
+        </Link>
         <Divider />
         <MenuItem onClick={HandleDelete}>
           <ListItemIcon>

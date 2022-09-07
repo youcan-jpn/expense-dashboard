@@ -25,6 +25,7 @@ export const deleteReceiptById: ApiFunction<ReceiptId, null, Result<unknown, unk
 export const getReceiptById: ApiFunction<ReceiptId, null, Result<ReceiptDetailRes, unknown>> = async (receipt_id) => {
   try {
     const response = await api.get(`/receipts/${receipt_id}`);
+    console.log(`api func:${response.data}`);
     return success(response.data);
   } catch (err) {
     return failure({ err });
