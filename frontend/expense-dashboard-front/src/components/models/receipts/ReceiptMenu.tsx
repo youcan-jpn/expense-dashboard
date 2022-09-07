@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
 import Menu from '@mui/material/Menu';
@@ -22,7 +22,12 @@ interface IProps {
 
 const ReceiptMenu: React.FC<IProps> = (props) => {
   const { receipt_id, anchorEl, open, onClose } = props;
+  const navigate = useNavigate();
   const fetchReceiptList = useContext(receiptContext);
+
+  const HandleClick = () => {
+    navigate(`/receipts/${receipt_id}`)
+  }
 
   const HandleDelete = async () => {
     const res = await deleteReceiptById(receipt_id);
@@ -40,14 +45,12 @@ const ReceiptMenu: React.FC<IProps> = (props) => {
         anchorEl={anchorEl}
         onClose={onClose}
       >
-        <Link to={`/receipts/${receipt_id}`}>
-          <MenuItem>
-            <ListItemIcon>
-              <LoupeIcon fontSize="small" />
-            </ListItemIcon>
-            <ListItemText>View Detail</ListItemText>
-          </MenuItem>
-        </Link>
+        <MenuItem onClick={HandleClick}>
+          <ListItemIcon>
+            <LoupeIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText>View Detail</ListItemText>
+        </MenuItem>
         <Divider />
         <MenuItem onClick={HandleDelete}>
           <ListItemIcon>
