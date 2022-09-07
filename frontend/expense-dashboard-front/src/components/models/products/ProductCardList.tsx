@@ -11,6 +11,9 @@ interface IProps {
 export const ProductCardList: React.FC<IProps> = (props: IProps) => {
   const { products } = props;
   console.log(`card list:${products}`)
+  if (!products) {
+    return <p>Loading....</p>
+  }
   return (
     <Box>
       {products.map((product: Product) =>
