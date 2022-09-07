@@ -273,6 +273,8 @@ components:
           $ref: "#/components/schemas/price"
         tax_id:
           $ref: "#/components/schemas/tax_id"
+        tax_rate:
+          $ref: "#/components/schemas/tax_rate"
     product_list:
       type: array
       items:
