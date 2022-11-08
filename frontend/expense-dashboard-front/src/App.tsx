@@ -9,6 +9,7 @@ import { ReceiptPage } from './components/pages/Receipt.page';
 import { ReceiptViewerPage } from './components/pages/ReceiptViewer.page';
 
 import './App.css';
+import '@fontsource/roboto';
 
 
 function App() {
