@@ -46,11 +46,11 @@ export const ReceiptTable: React.FC<Prop> = (prop: Prop) => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="center">ID</TableCell>
-              <TableCell align="center">Shop</TableCell>
-              <TableCell align="center">Price</TableCell>
-              <TableCell align="center">Date</TableCell>
-              <TableCell align="right">Option</TableCell>
+              <TableCell align="center">Receipt ID</TableCell>
+              <TableCell align="center">Shop Name</TableCell>
+              <TableCell align="center">Total Price</TableCell>
+              <TableCell align="center">Purchase Date</TableCell>
+              <TableCell align="right">Options</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
